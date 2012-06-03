@@ -1,0 +1,6 @@
+#Imagen
+img/*
+#Binarios
+impl/kernel.bin
+#Temporales
+*~

@@ -1,0 +1,18 @@
+Para debuggear el kernel:
+
+Compilar todo con Símbolos de Debug en gcc y nasm (-g)
+Abrir el qemu con los flags:
+-S freeza el cpu al arranque.
+-s espera conexiones de gdb en el puerto default 1234
+-p especifica el puerto a usar, default 1234
+
+-Con el gdb el kernel, conectarse a qemu con:
+target remote localhost:1234 (si no se dijo otro)
+
+-Colocar un break en algun lugar, por ejemplo en _loader
+
+break _loader
+
+Continuar con:
+c
+
