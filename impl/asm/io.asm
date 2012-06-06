@@ -6,6 +6,8 @@ _in:
 	mov ebp, esp
 
 	push dx
+	
+	xor eax, eax
 
 	mov word dx, [ss:ebp+8]; puerto
 	in al, dx

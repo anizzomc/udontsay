@@ -22,7 +22,6 @@ GLOBAL _irq05Handler
 
 
 EXTERN irqDispatcher
-EXTERN int_08
 
 %macro irqHandlerMaster 1
 	push ds
@@ -110,22 +109,11 @@ _irq04Handler:
 ;USB
 _irq05Handler:
 	irqHandlerMaster 5
-
-
-int_08_hand:				; Handler de INT 8 ( Timer tick)
-    push    ds
-    push    es                      ; Se salvan los registros
-    pusha                           ; Carga de DS y ES con el valor del selector
-    mov     ax, 10h			; a utilizar.
-    mov     ds, ax
-    mov     es, ax
-    call    int_08
-    mov	al,20h			; Envio de EOI generico al PIC
-	out	20h,al
-	popa
-    pop     es
-    pop     ds
-    iret
+	
+	
+yield:
+	hlt
+	ret
 
 haltcpu:
 	cli

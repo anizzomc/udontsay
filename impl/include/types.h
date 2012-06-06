@@ -11,15 +11,15 @@
 typedef unsigned int size_t;
 
 typedef unsigned char byte;
-typedef short int word;
-typedef int dword;
+typedef unsigned short int word;
+typedef unsigned int dword;
 
 typedef struct {
 	int x;
 	int y;
 } coord_t;
 
-
+#define NULL (void *)0
 
 #pragma pack(push)
 #pragma pack (1) 		/* Alinear las siguiente estructuras a 1 byte */

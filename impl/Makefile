@@ -15,10 +15,11 @@ all:
 	gcc $(FLAGS) klib/kvideo.c  -o klib_kvideo.o $(DIRECTIVES)
 	gcc $(FLAGS) kernel.c -o kernel.o $(DIRECTIVES) 
 	gcc $(FLAGS) lib/string.c -o lib_string.o $(DIRECTIVES)
+	gcc $(FLAGS) drivers/serial.c -o drivers_serial.o $(DIRECTIVES)
 	
-	ld -melf_i386 -T link.ld -o kernel.bin kernel.o loader.o asm_interrupts.o asm_io.o crtc6845.o klib_klib.o klib_kvideo.o arch_hanlders.o lib_string.o asm_cpuid.o arch_cpuid.o
+	ld -melf_i386 -T link.ld -o kernel.bin kernel.o loader.o asm_interrupts.o asm_io.o crtc6845.o klib_klib.o klib_kvideo.o arch_hanlders.o lib_string.o asm_cpuid.o arch_cpuid.o drivers_serial.o
 	rm *.o
-	mcopy kernel.bin a:/boot -o
+	mcopy kernel.bin z:/boot -o
 clean:
 	rm *.o
 	rm kernel.bin

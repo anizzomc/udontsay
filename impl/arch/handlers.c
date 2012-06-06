@@ -1,20 +1,25 @@
 
+#include "arch/handlers.h"
 #include "types.h"
 #include "klib.h"
 
+#define  QTY_HANDLERS 16 //Amount of handlers by the system.
+
+handlerfnc_t handlers[QTY_HANDLERS] = {0};
+
+void handlers_configure(int irq, handlerfnc_t fnc) {
+	handlers[irq] = fnc;
+}
+
+handlerfnc_t handlers_get(int irq){
+	return handlers[irq];
+}
 
 void irqDispatcher(dword irq){
 
-	kprintf("Received IRQ:%x\n", irq);
-	
-	
-	if(irq == 1) { //keyboard
-		kprintf("Scancode: %x\n", _in(0x60));
+	if(handlers[irq] != NULL){
+		handlers[irq]();
 	}
-	
+
 	return;
-}
-
-void int_08(){
-
 }

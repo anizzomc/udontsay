@@ -10,8 +10,15 @@
 
 #include "types.h"
 
+
+//Declare how the handlers are used.
+typedef void (*handlerfnc_t)(void);
+
+//Function that receives the IRQ events by hardware.
 void irqDispatcher(dword irq);
 
-void int_08_hand();
+void handlers_configure(int irq, handlerfnc_t fnc);
+
+handlerfnc_t handlers_get(int irq);
 
 #endif /* HANDLERS_H_ */

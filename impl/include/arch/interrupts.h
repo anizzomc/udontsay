@@ -25,7 +25,7 @@ void picMasterMask(byte mask);
 
 void picSlaveMask(byte mask);
 
-void int_80_hand();
+void yield();
 
 void lidt(IDTR *idtr);
 
