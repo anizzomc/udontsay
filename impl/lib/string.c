@@ -1,5 +1,7 @@
 #include "string.h"
 
+static char representingStr[] = "ABCDEFGHIJKLMNOQPRSTUVWXYZ";
+
 void *memcpy(void *dst, const void *src, size_t qty) {
 		char *dstC = (char *)dst;
 		char *srcC = (char *)src;
@@ -154,4 +156,28 @@ void strremove(char * str, int start, int finish)
 			temp[j++]= str[i];
 	}
 	strcpy(str,temp);
+}
+
+char *dataToStr(char *data, int size) {
+	int i, j;
+	char buff[3];
+	
+	
+	
+	for(i = 0, j = 0; i < size ; i++){
+		itoa(buff, 'x', data[i]);
+		
+		if(data[i] < 0xF){
+			representingStr[j++] = '0';
+			representingStr[j++] = buff[0];
+		} else {
+			representingStr[j++] = buff[0];
+			representingStr[j++] = buff[1];
+		}
+		
+		representingStr[j++] = ' ';
+
+	}
+	representingStr[j] = 0;
+	return representingStr;
 }

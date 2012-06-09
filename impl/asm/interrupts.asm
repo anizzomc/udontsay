@@ -12,6 +12,7 @@ GLOBAL picSlaveMask
 GLOBAL int_08_hand
 GLOBAL _lidt
 GLOBAL haltcpu
+GLOBAL yield
 
 GLOBAL _irq00Handler
 GLOBAL _irq01Handler

@@ -6,7 +6,7 @@
 
 #define BUFFER_SIZE 256
 
-static int baseaddress[] = {COM1};
+//static int baseaddress[] = {COM1};
 
 void serial_init(int serial_port, serial_bps_t serial_speed, char *config) {
    _out(serial_port + 1, 0x00);    // Disable all interrupts

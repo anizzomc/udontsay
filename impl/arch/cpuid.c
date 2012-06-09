@@ -5,7 +5,7 @@
  *      Author: anizzomc
  */
 
-#include "cpuid.h"
+#include "arch/cpuid.h"
 
 int _cpuidLongMode();
 void _cpuidString(char *array);

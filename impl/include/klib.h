@@ -14,8 +14,12 @@ void kclearScreen();
 
 void kvinit();
 
+void _lidt(dword idt);
+
 void setup_IDT_entry (DESCR_INT *item, byte selector, dword offset, byte access, byte cero);
 
 void kputchar(char c);
+
+void kprintf(const char *fmt, ...);
 
 #endif /* KLIB_H_ */

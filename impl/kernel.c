@@ -3,7 +3,13 @@
 #include "multiboot.h"
 #include "arch/handlers.h"
 #include "arch/cpuid.h"
+#include "arch/io.h"
 #include "drivers/serial.h"
+#include "klib.h"
+
+#include "pic/serialMotors.h"
+#include "pic/stateMachine.h"
+
 
 DESCR_INT idt[0xF];	// IDT de 16 entradas
 IDTR idtr;			// IDTR
@@ -25,7 +31,7 @@ int kmain(multiboot_info_t* mbd, unsigned int magic)
 	idtr.base = 0;  
 	idtr.base +=(dword) &idt;
 	idtr.limit = sizeof(idt)-1;	
-	_lidt (&idtr);	
+	_lidt ((dword) &idtr);	
 
 
 	//Configure Handlers
@@ -50,10 +56,13 @@ int kmain(multiboot_info_t* mbd, unsigned int magic)
 	kclearScreen();
 	kprintf("Kernel Loaded!\n");
 	kprintf("Lower memory: %d\t Higher memory: %d\n", mbd->mem_lower, mbd->mem_upper);
+
+	char buff[4] = "012";
+
+	kprintf("Stra: %s\n", dataToStr(buff, 4));
 	
-	
-	while(1){			
-		asm("hlt");
+	while(1){
+		yield();
 	}
 
 

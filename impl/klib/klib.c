@@ -8,6 +8,7 @@
 #include "types.h"
 #include "klib.h"
 #include "string.h"
+#include "drivers/crtc6845.h"
 
 void kprintf (const char *format, ...)
 	{
