@@ -6,3 +6,6 @@ impl/kernel.bin
 *~
 #Project Name
 *.geany
+
+#Java Binaries
+*.class

@@ -5,7 +5,7 @@
  */
 
 /*
- * Archivo para realizar debbugging en el c—digo y no llenar de printfs
+ * Archivo para realizar debbugging en el codigo y no llenar de printfs
  * Existen 4 Niveles
  * 	DEBUG_LOG
  * 	DEBUG_WARN
@@ -39,7 +39,8 @@
 #ifndef DEBUG_H_
 #define DEBUG_H_
 
-#include <stdio.h>
+#include "klib.h"
+#include "stdlib.h"
 
 #ifdef DEBUG_LOG
 	#define DEBUG_LEVEL 5

@@ -6,7 +6,7 @@
 
 #define NULL_COMMAND 0	//Nothing
 
-typedef enum {state_init, state_command, state_size, state_data, state_checksum, state_finished, state_failed} state_t;
+typedef enum {state_command, state_size, state_data, state_checksum, state_finished, state_failed} state_t;
 
 typedef struct {
 	package_t package;

@@ -8,6 +8,7 @@
 #ifndef STDLIB_H_
 #define STDLIB_H_
 
+#include "sys/mmu.h"
 
 #define NULL (void*)0
 

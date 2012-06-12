@@ -6,10 +6,11 @@
 #include "arch/io.h"
 #include "drivers/serial.h"
 #include "klib.h"
+#include "string.h"
 
 #include "pic/serialMotors.h"
 #include "pic/stateMachine.h"
-
+#include "pic/pic.h"
 
 DESCR_INT idt[0xF];	// IDT de 16 entradas
 IDTR idtr;			// IDTR
@@ -62,6 +63,7 @@ int kmain(multiboot_info_t* mbd, unsigned int magic)
 	kprintf("Stra: %s\n", dataToStr(buff, 4));
 	
 	while(1){
+		proc_cicle();
 		yield();
 	}
 
@@ -78,9 +80,6 @@ void tick_handler() {
 }
 
 void serial_handler() {
-	int c;
-	if((c = serial_getc(COM1)) != -1){
-		c += 'A' - 'a';
-		serial_putc(COM1, c);
-	}
+	kprintf("Received: %x\n", _in(COM1));	
+	//int_rda();
 }

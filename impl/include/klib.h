@@ -22,4 +22,11 @@ void kputchar(char c);
 
 void kprintf(const char *fmt, ...);
 
+void enable_interrupts();
+
+void yield();
+
+void disable_interrupts();
+
+
 #endif /* KLIB_H_ */

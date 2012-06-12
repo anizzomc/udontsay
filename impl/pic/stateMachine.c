@@ -1,5 +1,5 @@
 /* <stateMachine.c> */
-#include "sys/mmu.h"
+#include "stdlib.h"
 #include "pic/stateMachine.h"
 #include "debug.h"
 
@@ -7,8 +7,10 @@
 stateMachine_t stateMachine_new() {
 	stateMachine_t ret;
 	
+	LOG("stateMachine_new()");
+	
 	ret.package.command = NULL_COMMAND;
-	ret.state = state_init;
+	ret.state = state_command;
 	ret.datacount = 0;
 	
 	return ret;
@@ -22,7 +24,7 @@ void stateMachine_reset(stateMachine_t machine) {
 		}
 		machine.package.command = NULL_COMMAND;
 	}
-	machine.state = state_init;
+	machine.state = state_command;
 	machine.checksum = 0;
 }
 
@@ -32,19 +34,19 @@ state_t stateMachine_state(stateMachine_t machine, char data) {
 	LOG("Previous Package Command: %d, Size: %d, Data")
 
 	switch(machine.state){
-		case state_init: {
-			machine.package.command = data;
-			machine.state = state_command;
-		}
-		break;
 		case state_command: {
-			machine.package.size = data;
-			machine.package.data = (char *) malloc(data);
-			machine.datacount = data;
+			machine.package.command = data;
 			machine.state = state_size;
 		}
 		break;
 		case state_size: {
+			machine.package.size = data;
+			machine.package.data = (char *) malloc(data);
+			machine.datacount = data;
+			machine.state = state_data;
+		}
+		break;
+		case state_data: {
 			machine.package.data[machine.package.size - machine.datacount] = data;
 			machine.datacount--;
 			if(machine.datacount == 0){
@@ -82,8 +84,6 @@ package_t stateMachine_package(stateMachine_t machine){
 
 char *stateToStr(state_t state) {
 	switch(state) {
-		case state_init:
-			return "state_init";
 		case state_command:
 			return "state_command";
 		case state_size:

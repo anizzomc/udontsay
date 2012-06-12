@@ -9,6 +9,7 @@
 #include "klib.h"
 #include "string.h"
 #include "drivers/crtc6845.h"
+#include "arch/interrupts.h"
 
 void kprintf (const char *format, ...)
 	{
@@ -63,6 +64,13 @@ void kputchar(char c){
 }
 
 
+void enable_interrupts(){
+	_sti();
+}
+
+void disable_interrupts(){
+	_cli();
+}
 /***************************************************************
 *setup_IDT_entry
 * Inicializa un descriptor de la IDT

@@ -1,6 +1,6 @@
 INC_PATH = include/
 DIRECTIVES = -fno-builtin -nostartfiles -nostdlib -I $(INC_PATH)
-FLAGS = -Wall -g -m32 -c
+FLAGS = -Wall -g -m32 -c -DDEBUG_LOG
 
 all:
 	nasm -f aout -g loader.asm -o loader.o 
@@ -21,10 +21,12 @@ all:
 	
 	
 	#Pic Code
+	gcc $(FLAGS) pic/stateMachine.c -o pic_stateMachine.o $(DIRECTIVES)
 	gcc $(FLAGS) pic/serialMotors.c -o pic_serialMotors.o $(DIRECTIVES)
+	gcc $(FLAGS) pic/pic.c -o pic_pic.o $(DIRECTIVES)
 	
 	
-	ld -melf_i386 -T link.ld -o kernel.bin loader.o kernel.o asm_interrupts.o asm_io.o crtc6845.o klib_klib.o klib_kvideo.o arch_hanlders.o lib_string.o asm_cpuid.o arch_cpuid.o drivers_serial.o sys_mmu.o pic_serialMotors.o
+	ld -melf_i386 -T link.ld -o kernel.bin loader.o kernel.o asm_interrupts.o asm_io.o crtc6845.o klib_klib.o klib_kvideo.o arch_hanlders.o lib_string.o asm_cpuid.o arch_cpuid.o drivers_serial.o sys_mmu.o pic_serialMotors.o pic_pic.o  pic_stateMachine.o
 	rm *.o
 	mcopy kernel.bin z:/boot -o
 clean:

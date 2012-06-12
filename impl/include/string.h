@@ -28,5 +28,7 @@ void token(char * dst, char * str, char sep, int beginning);
 void stradd(char * dst, char * src);
 void strremove(char * str, int start, int finish);
 
+char *dataToStr(char *data, int size);
+
 
 #endif /* STRING_H_ */

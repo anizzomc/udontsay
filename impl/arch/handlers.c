@@ -2,6 +2,7 @@
 #include "arch/handlers.h"
 #include "types.h"
 #include "klib.h"
+#include "stdlib.h"
 
 #define  QTY_HANDLERS 16 //Amount of handlers by the system.
 

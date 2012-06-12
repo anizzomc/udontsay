@@ -9,7 +9,7 @@ typedef struct {
 	char checksum;
 } package_t;
 
-char *dataToStr(char *data, char size);
+
 
 #endif
 /* </serialMotors.h> */
