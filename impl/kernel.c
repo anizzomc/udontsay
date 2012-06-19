@@ -72,14 +72,13 @@ int kmain(multiboot_info_t* mbd, unsigned int magic)
 
 //Remove key from keyboard buffer.
 void keyboard_handler() {
-		_in(0x60);
+	_in(0x60);
 }
 
 void tick_handler() {
 
 }
 
-void serial_handler() {
-	kprintf("Received: %x\n", _in(COM1));	
-	//int_rda();
+void serial_handler() {	
+	int_rda();
 }

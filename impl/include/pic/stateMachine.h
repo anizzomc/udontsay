@@ -19,11 +19,11 @@ char *stateToStr(state_t state);
 
 stateMachine_t stateMachine_new();
 
-void stateMachine_reset(stateMachine_t machine);
+void stateMachine_reset(stateMachine_t *machine);
 
-state_t stateMachine_state(stateMachine_t machine, char data);
+state_t stateMachine_state(stateMachine_t *machine, char data);
 
-package_t stateMachine_package(stateMachine_t machine);
+package_t stateMachine_package(stateMachine_t *machine);
 
 #endif
 /* </stateMachine.h> */

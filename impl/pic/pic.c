@@ -29,15 +29,17 @@ void int_rda(){
 	}
 	
 	
-	switch((state = stateMachine_state(machine, c))){
+	switch((state = stateMachine_state(&machine, c))){
 		case state_command: case state_size: case state_checksum: case state_data: {
 			LOG("pic::int_rda() State: %s", stateToStr(state));
 			break;
 		case state_finished:
-			LOG("pic::int_rda() package finished");
-			package = stateMachine_package(machine);
+			LOG("pic::int_rda() package finished ok");
+			package = stateMachine_package(&machine);
+			stateMachine_reset(&machine);
 			break;
 		case state_failed:
+			stateMachine_reset(&machine);
 			LOG("pic::int_rda() package failed");
 		}
 
@@ -50,11 +52,11 @@ void proc_cicle() {
 	init();
 	
 	while(1) {
+		//desenconolar
+		//procesar
+		//enviar respuesta.
 		
-		
-		
-		
-		yield();
+		yield(); //--> no darle bola
 	}
 
 
@@ -66,7 +68,7 @@ void init() {
 	LOG("pic::init() in");
 	
 	machine = stateMachine_new();
-	stateMachine_reset(machine);
+	stateMachine_reset(&machine);
 	
 	
 	LOG("pic::init() out");
