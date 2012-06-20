@@ -12,7 +12,7 @@ typedef struct {
 	package_t package;
 	state_t state;
 	int datacount;
-	char checksum;
+	unsigned char checksum;
 } stateMachine_t;
 
 char *stateToStr(state_t state);

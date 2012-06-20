@@ -158,11 +158,9 @@ void strremove(char * str, int start, int finish)
 	strcpy(str,temp);
 }
 
-char *dataToStr(char *data, int size) {
+char *dataToStr(unsigned char *data, int size) {
 	int i, j;
-	char buff[3];
-	
-	
+	char buff[10];
 	
 	for(i = 0, j = 0; i < size ; i++){
 		itoa(buff, 'x', data[i]);

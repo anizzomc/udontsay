@@ -58,9 +58,6 @@ int kmain(multiboot_info_t* mbd, unsigned int magic)
 	kprintf("Kernel Loaded!\n");
 	kprintf("Lower memory: %d\t Higher memory: %d\n", mbd->mem_lower, mbd->mem_upper);
 
-	char buff[4] = "012";
-
-	kprintf("Stra: %s\n", dataToStr(buff, 4));
 	
 	while(1){
 		proc_cicle();

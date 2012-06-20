@@ -4,7 +4,7 @@
 #include "stdlib.h"
 
 #define MAX_MEMORY 10*1024*1024 //10 MB
-#define MEM_BASE	0x400000
+#define MEM_BASE	0x200000
 #define MEM_CEIL (MEM_BASE + MAX_MEMORY)
 
 

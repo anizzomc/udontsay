@@ -3,10 +3,10 @@
 #define _SERIAL_MOTORS_H_
 
 typedef struct {
-	char command;
-	char size;
-	char *data;
-	char checksum;
+	unsigned char command;
+	unsigned char size;
+	unsigned char *data;
+	unsigned char checksum;
 } package_t;
 
 
