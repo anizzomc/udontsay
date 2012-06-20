@@ -4,6 +4,7 @@
 #include "debug.h"
 #include "string.h"
 
+
 stateMachine_t stateMachine_new() {
 	stateMachine_t ret;
 	
@@ -24,6 +25,7 @@ void stateMachine_reset(stateMachine_t *machine) {
 			machine->package.data = NULL;
 		}
 		machine->package.command = NULL_COMMAND;
+		machine->checksum = 0;
 	}
 	machine->state = state_command;
 }
@@ -47,9 +49,7 @@ state_t stateMachine_state(stateMachine_t *machine, char data) {
 		}
 		break;
 		case state_data: {
-			kprintf("data: %x\n",data);
 			machine->package.data[machine->package.size - machine->datacount] = data;
-			kprintf("machine-package.data[%d]=%x\n", machine->package.size - machine->datacount, machine->package.data[machine->package.size - machine->datacount]);
 			machine->datacount--;
 			if(machine->datacount == 0){
 				machine->state = state_checksum;

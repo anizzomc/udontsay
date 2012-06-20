@@ -77,5 +77,8 @@ void tick_handler() {
 }
 
 void serial_handler() {	
+	//unsigned char c = serial_getc(COM1);
+	//kprintf("C: %x\n", c);
+	//serial_putc(COM1, c + 1);
 	int_rda();
 }

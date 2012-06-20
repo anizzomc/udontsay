@@ -69,19 +69,19 @@
 #endif
 
 #if (DEBUG_LEVEL > 3)
-#define WARN(msg, ...)	kprintf("warn:%s:%d - ", __FILE__, __LINE__); kprintf(msg,##__VA_ARGS__) kputchar('\n');
+#define WARN(msg, ...)	kprintf("warn:%s:%d - ", __FILE__, __LINE__); kprintf(msg,##__VA_ARGS__); kputchar('\n');
 #else
 #define WARN(msg, ...)
 #endif
 
 #if (DEBUG_LEVEL > 2)
-#define ERROR(msg, ...)	kprintf("error:%s:%d - ", __FILE__, __LINE__); kprintf(msg,##__VA_ARGS__) kputchar('\n');
+#define ERROR(msg, ...)	kprintf("error:%s:%d - ", __FILE__, __LINE__); kprintf(msg,##__VA_ARGS__); kputchar('\n');
 #else
 #define ERROR(msg, ...)
 #endif
 
 #if (DEBUG_LEVEL > 1)
-#define FATAL(msg, ...)	kprintf("fatal:%s:%d - ", __FILE__, __LINE__); kprintf(msg,##__VA_ARGS__) kputchar('\n');
+#define FATAL(msg, ...)	kprintf("fatal:%s:%d - ", __FILE__, __LINE__); kprintf(msg,##__VA_ARGS__); kputchar('\n');
 #else
 #define FATAL(msg, ...)
 #endif
