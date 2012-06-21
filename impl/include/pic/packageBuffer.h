@@ -5,7 +5,7 @@
 
 #define PACKAGEBUFFER_SIZE 10
 
-#include "pic/serialMotors.h"
+#include "pic/package.h"
 
 void packageBuffer_init();
 

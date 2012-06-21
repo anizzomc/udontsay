@@ -1,16 +1,16 @@
 /* <stateMachine.c> */
+
 #include "stdlib.h"
-#include "pic/stateMachine.h"
 #include "debug.h"
 #include "string.h"
 
+#include "pic/stateMachine.h"
+#include "pic/package.h"
 
 stateMachine_t stateMachine_new() {
 	stateMachine_t ret;
 	
-	LOG("stateMachine_new()");
-	
-	ret.package.command = NULL_COMMAND;
+	ret.package = package_null();
 	ret.state = state_command;
 	ret.datacount = 0;
 	ret.checksum = 0;
@@ -19,21 +19,14 @@ stateMachine_t stateMachine_new() {
 }
 
 void stateMachine_reset(stateMachine_t *machine) {
-	if(machine->package.command != NULL_COMMAND){
-		if(machine->package.data != NULL){
-			free(machine->package.data);
-			machine->package.data = NULL;
-		}
-		machine->package.command = NULL_COMMAND;
-		machine->checksum = 0;
-	}
+	package_free(&machine->package);
+	machine->package = package_null();
+	machine->datacount = 0;
+	machine->checksum = 0;
 	machine->state = state_command;
 }
 
 state_t stateMachine_state(stateMachine_t *machine, char data) {
-
-	LOG("Previous Machine State: %s, Count: %d, CS: %x", stateToStr(machine->state), machine->datacount, machine->checksum);
-	LOG("Previous Package Command: %d, Size: %d, Data: %s, CS: %x", machine->package.command, machine->package.size, dataToStr(machine->package.data, machine->package.size), machine->package.checksum);
 
 	switch(machine->state){
 		case state_command: {
@@ -57,7 +50,6 @@ state_t stateMachine_state(stateMachine_t *machine, char data) {
 		} 
 		break;
 		case state_checksum: {
-			machine->package.checksum = data;
 			machine->state = state_finished;
 		}
 		break;
@@ -71,14 +63,12 @@ state_t stateMachine_state(stateMachine_t *machine, char data) {
 	if(machine->state != state_finished){
 		machine->checksum ^= data;
 	} else {
-		if(machine->checksum != machine->package.checksum){
+		if(machine->checksum != data){
 			machine->state = state_failed;
+			package_free(&machine->package);
 		}
 	}
-
-	LOG("Following Machine State: %s, Count: %d, CS: %x", stateToStr(machine->state), machine->datacount, machine->checksum);
-	LOG("Following Package Command: %d, Size: %d, Data: %s, CS: %x", machine->package.command, machine->package.size, dataToStr(machine->package.data, machine->package.size), machine->package.checksum);
-
+	
 	return machine->state;
 }
 

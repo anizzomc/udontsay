@@ -50,8 +50,6 @@ int kmain(multiboot_info_t* mbd, unsigned int magic)
 	//Enable TimerTick, Keyboard and Serial
 	picMasterMask(0xEC); 
 	picSlaveMask(0xFF);
-         
-	_sti();
 
 	kvinit();
 	kclearScreen();
