@@ -8,8 +8,6 @@
 #include "klib.h"
 #include "string.h"
 
-#include "pic/serialMotors.h"
-#include "pic/stateMachine.h"
 #include "pic/pic.h"
 
 DESCR_INT idt[0xF];	// IDT de 16 entradas
