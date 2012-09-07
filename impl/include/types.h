@@ -14,6 +14,9 @@ typedef unsigned char byte;
 typedef unsigned short int word;
 typedef unsigned int dword;
 
+typedef unsigned int int32;
+
+
 typedef struct {
 	int x;
 	int y;

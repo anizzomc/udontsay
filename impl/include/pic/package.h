@@ -4,45 +4,45 @@
 #define _PACKAGE_H_
 
 #include "string.h"
+#include "types.h"
+
+#define DATA_LENGTH 4
 
 typedef enum {command_null, command_ping, command_pong} command_t;
 
 typedef struct {
 	command_t command;
-	unsigned char size;
-	unsigned char *data;
+	byte data[DATA_LENGTH];
+//  byte checksum
 } package_t;
 
-package_t package_new(command_t command, const unsigned char* data, unsigned char size);
+package_t package_new(command_t command,byte data[]);
 
 package_t package_null();
 
-void package_free(package_t *package);
-
-
-package_t package_new(command_t command, const unsigned char* data, unsigned char size){
+package_t package_new(command_t command, byte data[]){
 	package_t ret;
+	int i;
 	
 	ret.command = command;
-	ret.size = size;
-	ret.data = malloc(size);
-	memcpy(ret.data, data, size);
+	
+	for(i = 0; i < DATA_LENGTH ; i++)
+		ret.data[i] = data[i];
 	
 	return ret;
 }
 
 package_t package_null(){
-	package_t ret = {0, 0,NULL};
+	package_t ret;
+	int i;
+	
+	ret.command = command_null;
+	
+	for(i = 0; i < DATA_LENGTH ; i++)
+		ret.data[i] = 0;
+	
 	return ret;
 }
-
-void package_free(package_t *package){
-	package->command = command_null;
-	if(package->data != NULL)
-		free(package->data);
-	package->data = NULL;
-}
-
 
 #endif
 

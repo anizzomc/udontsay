@@ -35,7 +35,7 @@ package_t serialMotors_process(package_t request){
 }
 
 static package_t do_ping(package_t request){
-	return package_new(command_pong, request.data, request.size);
+	return package_new(command_pong, request.data);
 }
 
 #undef DEBUG_LOG

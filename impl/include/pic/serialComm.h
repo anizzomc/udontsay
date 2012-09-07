@@ -31,11 +31,13 @@ void serialComm_init() {
 void serialComm_charArrived(unsigned char c){
 	state_t state;
 	package_t package;
-
-	switch((state = stateMachine_state(&machine, c))){
-		case state_command: case state_size: case state_checksum: case state_data: {
+	
+	state = stateMachine_state(&machine, c);
+	switch(state){
+		case state_command: case state_checksum: case state_data: {
 			break;
 		case state_finished:
+			LOG("package finished");
 			package = stateMachine_package(&machine);
 			stateMachine_reset(&machine);
 			
@@ -47,7 +49,7 @@ void serialComm_charArrived(unsigned char c){
 			break;
 		case state_failed:
 			stateMachine_reset(&machine);
-			ERROR("serialComm::charArrived() package failed <-- take action!");
+			ERROR("serialComm::charArrived() package failed!");
 		}
 	}
 }
@@ -58,10 +60,8 @@ void serialComm_send(package_t *package){
 	
 	checksum = package->command;
 	serial_putc(COM1, package->command);
-	checksum ^= package->size;
-	serial_putc(COM1, package->size);
-	
-	for(i = 0; i < package->size ; i++){
+		
+	for(i = 0; i < DATA_LENGTH ; i++){
 		checksum ^= package->data[i];
 		serial_putc(COM1, package->data[i]);
 	}

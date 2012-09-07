@@ -3,7 +3,7 @@
 #ifndef _PACKAGEBUFFER_H_
 #define _PACKAGEBUFFER_H_
 
-#define PACKAGEBUFFER_SIZE 10
+#define PACKAGEBUFFER_SIZE 3
 
 #include "pic/package.h"
 
